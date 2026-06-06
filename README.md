@@ -58,30 +58,32 @@ The project demonstrates end-to-end integration from sensor acquisition to cloud
 * Event tracking and analysis
 
 ---
-
 ## System Architecture
 
-```text
-Heart Rate Sensor
-        |
-        v
-Wearable ESP32 (M1)
-        |
-        | ESP-NOW
-        v
-Home ESP32 (M2)
-        |
-        v
-Wi-Fi
-        |
-        v
-Zapier
-        |
-        v
-Google Sheets
-        |
-        v
-Email Notifications
+```mermaid
+flowchart LR
+
+    HR[Heart Rate Sensor]
+    M1[Wearable ESP32 M1]
+
+    PROX[Ultrasonic Sensor]
+    SMOKE[Smoke / Fire Sensor]
+    M2[Home ESP32 M2]
+
+    ZAP[Zapier]
+    GS[Google Sheets]
+    EMAIL[Caregiver Email Alerts]
+
+    HR --> M1
+
+    PROX --> M2
+    SMOKE --> M2
+
+    M1 <--> |ESP-NOW| M2
+
+    M2 -->|Wi-Fi| ZAP
+    ZAP --> GS
+    ZAP --> EMAIL
 ```
 
 ---
